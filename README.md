@@ -1,9 +1,4 @@
-import Basecaller
-import Alignment
-import Signal
-import Decon
-
-
+```python
 ; List of Steps Inputs and Outputs required for preprocessing
 ; Advised to run separately
 
@@ -65,15 +60,3 @@ input_path = "/Users/timshel/transcripts/ACIM/ACIM_422.txt"
 mod = "ACIM"
 CPUS = 10
 Decon.run_decon(input_path, modification=mod, cpus=CPUS)
-
-
-
-# =========================================================
-# Mermaid Flowchart for README
-# =========================================================
-# flowchart TD
-#     A[FAST5 Files] --> B[Guppy Basecaller<br/>(Basecaller.run_guppybasecall)]
-#     B -->|Compressed FASTQ| C[Alignment<br/>(minimap2, samtools, gzip)]
-#     C -->|single.fastq + BAM| D[Nanopolish Signal Extraction<br/>(Signal.run_signal)]
-#     D -->|Event Align TXT| E[Decon Preprocessing<br/>(Decon.run_decon)]
-#     E --> F[ML-Ready Scaled Features]
