@@ -62,7 +62,7 @@ def run_decon(input_path, modification, cpus):
     cpu = min(multiprocessing.cpu_count(), cpus)
     multiprocessing.freeze_support()  # Required on macOS/Windows
     df = pd.read_csv(input_path, sep='\t')
-    preprocess_df(df=df, mod=mod, max_workers=cpu)
+    preprocess_df(df=df, mod=modification, max_workers=cpu)
     print("Processing complete.")
     return
 
