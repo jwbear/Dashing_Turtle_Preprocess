@@ -1,3 +1,9 @@
+import Basecaller
+import Alignment
+import Signal
+import Decon
+
+
 #### List of Steps Inputs and Outputs required for preprocessing
 #### Advised to run separately
 
@@ -12,6 +18,8 @@
 input_path=""
 basecall_dirs = Basecaller.run_guppybasecall(input_path, config="rna_r9.4.1_70bps_hac.cfg")
 print(basecall_dirs)
+
+
 ########################## REQUIREMENTS ##################
 # REQUIRES APPLICATIONS (command line installation):  minimap2, samtools, gzip
 # REQUIRED FILES in Input Directory:
@@ -21,6 +29,8 @@ print(basecall_dirs)
 ###########################################################
 alignment_dirs = ""
 print(alignment_dirs)
+
+
 ########################## REQUIREMENTS ##################
 # REQUIRED ENVIRONMENT: LINUX preferred
 # "compress_fast5", "nanopolish", "minimap2", "samtools", "python3"
@@ -38,6 +48,8 @@ fast5_path = ""
 alignment_dir = ""
 output_file = Signal.run_signal(fast5_path, alignment_dir)
 print(output_file)
+
+
 ########################## REQUIREMENTS ##################
 # REQUIRES APPLICATIONS (command line installation):  python, sklearn, multiprocesssing, concurrent
 # REQUIRED FILES:
@@ -50,3 +62,10 @@ input_path = "/Users/timshel/transcripts/ACIM/ACIM_422.txt"
 mod = "ACIM"
 CPUS = 10
 Decon.run_decon(input_path, modification=mod, cpus=CPUS)
+
+flowchart TD
+    A[FAST5 Files] --> B[Guppy Basecaller<br/>(Basecaller.run_guppybasecall)]
+    B -->|Compressed FASTQ| C[Alignment<br/>(minimap2, samtools, gzip)]
+    C -->|single.fastq + BAM| D[Nanopolish Signal Extraction<br/>(Signal.run_signal)]
+    D -->|Event Align TXT| E[Decon Preprocessing<br/>(Decon.run_decon)]
+    E --> F[ML-Ready Scaled Features]
