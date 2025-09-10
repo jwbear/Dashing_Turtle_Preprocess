@@ -60,3 +60,13 @@ input_path = "/Users/timshel/transcripts/ACIM/ACIM_422.txt"
 mod = "ACIM"
 CPUS = 10
 Decon.run_decon(input_path, modification=mod, cpus=CPUS)
+
+flowchart TD
+    A[FAST5 Files] --> B[Guppy Basecaller<br/>(Basecaller.run_guppybasecall)]
+    B -->|Compressed FASTQ| C[Alignment<br/>(Alignment.run_alignment)]
+    C -->|single.fastq + BAM| D[Nanopolish Signal Extraction<br/>(Signal.run_signal)]
+    D -->|Event Align TXT| E[Decon Preprocessing<br/>(Decon.run_decon)]
+    E --> F[ML-Ready Scaled Features]
+
+    classDef step fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#111;
+    class A,B,C,D,E,F step;
