@@ -58,7 +58,7 @@ def preprocess_df(df, mod, max_workers=5, chunk_size=100):
     return
 
 
-def run_decon(input_path, mod, cpus):
+def run_decon(input_path, modification, cpus):
     cpu = min(multiprocessing.cpu_count(), cpus)
     multiprocessing.freeze_support()  # Required on macOS/Windows
     df = pd.read_csv(input_path, sep='\t')
@@ -69,6 +69,6 @@ def run_decon(input_path, mod, cpus):
 
 if __name__ == "__main__":
     input_path = "/Users/timshel/transcripts/ACIM_422.txt"
-    modification = "ACIM"
+    mod = "ACIM"
     CPUS = min(multiprocessing.cpu_count(), 10)
-    run_decon(input_path, mod=modification, cpus=CPUS)
+    run_decon(input_path, modification=mod, cpus=CPUS)
