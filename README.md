@@ -4,19 +4,21 @@ import Signal
 import Decon
 
 
-#### List of Steps Inputs and Outputs required for preprocessing
-#### Advised to run separately
+# #### List of Steps Inputs and Outputs required for preprocessing
+# #### Advised to run separately
 
 
 ########################## REQUIREMENTS ##################
 # REQUIRES APPLICATIONS (command line installation):  ont-guppy basecaller
-# - Can be found her https://nanoporetech.com/software/other/guppy (login required)
+# - Can be found here https://nanoporetech.com/software/other/guppy (login required)
 # REQUIRED FILES in Input Directory:
 # - fast5 files
 # returns: compressed fast5 files for Alignment processing
 ###########################################################
-input_path=""
-basecall_dirs = Basecaller.run_guppybasecall(input_path, config="rna_r9.4.1_70bps_hac.cfg")
+input_path = ""
+basecall_dirs = Basecaller.run_guppybasecall(
+    input_path, config="rna_r9.4.1_70bps_hac.cfg"
+)
 print(basecall_dirs)
 
 
@@ -25,7 +27,7 @@ print(basecall_dirs)
 # REQUIRED FILES in Input Directory:
 # - Compressed fastq files: fastq.gz
 # - library.fasta/ library.fa of reference sequences
-# returns: Alignment Directory of sam, bam, baq, and single.fastq files required for Nanoplish processing
+# returns: Alignment Directory of sam, bam, baq, and single.fastq files required for Nanopolish processing
 ###########################################################
 alignment_dirs = ""
 print(alignment_dirs)
@@ -41,7 +43,7 @@ print(alignment_dirs)
 # - single.fastq created by Alignment
 # - alignment files from Alignment
 # - library.fasta/ library.fa of reference sequences
-# INPUT: Path to Directory of Fast 5 files, Path to Directory of Alignment files (output by Alignment)
+# INPUT: Path to Directory of Fast5 files, Path to Directory of Alignment files (output by Alignment)
 # returns: tab delimited text file of signal events
 ###########################################################
 fast5_path = ""
